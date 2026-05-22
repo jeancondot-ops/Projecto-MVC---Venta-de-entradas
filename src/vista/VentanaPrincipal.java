@@ -1,4 +1,4 @@
-package modelo;
+package vista;
 import javax.swing.JOptionPane;
 
 public class VentanaPrincipal extends javax.swing.JFrame {
