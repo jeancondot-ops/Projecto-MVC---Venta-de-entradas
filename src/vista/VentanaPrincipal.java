@@ -1,8 +1,10 @@
 package vista;
 import javax.swing.JOptionPane;
+import modelo.controlador.BoletoController;
 
 public class VentanaPrincipal extends javax.swing.JFrame {
 
+    private BoletoController controlador = new BoletoController();
     public VentanaPrincipal() {
         initComponents();
     }
@@ -77,17 +79,28 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        String zonaSeleccionada = comboZonas.getSelectedItem().toString();
+    String zonaSeleccionada = comboZonas.getSelectedItem().toString();
     int cantidad = (int) spinnerCantidad.getValue();
-
-    // 2. Lógica de negocio (Regla: Máximo 4 entradas)
+ 
     if (cantidad > 4) {
-        JOptionPane.showMessageDialog(this, "Solo puedes comprar máximo 4 entradas.");
-    } else {
-        // Aquí llamas a tus clases de lógica
-        System.out.println("Procesando compra de " + cantidad + " en zona " + zonaSeleccionada);
-    }
+    JOptionPane.showMessageDialog(this, 
+        "Solo puedes comprar máximo 4 entradas.", 
+        "Límite excedido", 
+        JOptionPane.WARNING_MESSAGE);
+    } else if (cantidad <= 0) {
+    javax.swing.JOptionPane.showMessageDialog(this, "Debes seleccionar al menos 1 entrada.");
+    } else 
+    {
+    controlador.registrarVenta(zonaSeleccionada, cantidad); 
+
+    javax.swing.JOptionPane.showMessageDialog(this, 
+        "¡Compra exitosa!\nZona: " + zonaSeleccionada + "\nCantidad: " + cantidad,
+        "Sistema de Ventas",
+        javax.swing.JOptionPane.INFORMATION_MESSAGE);
+    
+    // 3. (Opcional) Limpiar el selector después de la compra
+    spinnerCantidad.setValue(1);
+}
     }//GEN-LAST:event_jButton1ActionPerformed
 
     public static void main(String args[]) {

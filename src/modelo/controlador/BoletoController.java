@@ -11,9 +11,11 @@ public class BoletoController {
         this.ventaActual = new Venta(new Date(), 0);
     }
 
-    public void registrarVenta(int montoTotal) {
-        this.ventaActual = new Venta(new Date(), montoTotal);
+    public void registrarVenta(String zona, int cantidad) {
+        int precioBase = 50;
+        int montocalculado = precioBase * cantidad;
+        this.ventaActual = new Venta(new Date(), montocalculado);
         
-        System.out.println("Controlador: Venta registrada con monto: " + montoTotal);
+        System.out.println("Controlador: Venta registrada con monto: " + zona + " por un monto calculaoo " + montocalculado );
     }
 }
